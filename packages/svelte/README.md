@@ -3,7 +3,8 @@
 This is a component library that is shared across this monorepo. When you add something new,
 remember to add it to the exports in `package.json` in this package.
 
-> [!IMPORTANT] Instead of using `$lib`, use `@lib` instead. This is so that you can reference this
+> [!IMPORTANT] 
+> Instead of using `$lib`, use `@lib` instead. This is so that you can reference this
 > package in `svelte.config.js` in other packages. If you were to use `$lib`, other packages would
 > look into their own `$lib` instead of this package which may not contain the necessary code.
 
