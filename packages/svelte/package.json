@@ -1,0 +1,49 @@
+{
+  "name": "@svelteplex/svelte",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "prepare": "svelte-kit sync || echo ''",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "test:unit": "vitest",
+    "test": "npm run test:unit -- --run && npm run test:e2e",
+    "test:e2e": "playwright test"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    "./shadcn/*": "./src/lib/components/ui/*/index.js",
+    "./shadcn/css": "./src/app.css",
+    "./styles/*": "./src/lib/styles/*.css"
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0"
+  },
+  "devDependencies": {
+    "@lucide/svelte": "^0.511.0",
+    "@playwright/test": "^1.49.1",
+    "@sveltejs/adapter-auto": "^6.0.0",
+    "@sveltejs/kit": "^2.16.0",
+    "@sveltejs/package": "^2.0.0",
+    "@sveltejs/vite-plugin-svelte": "^5.0.0",
+    "@tailwindcss/forms": "^0.5.9",
+    "@tailwindcss/typography": "^0.5.15",
+    "@tailwindcss/vite": "^4.0.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/svelte": "^5.2.4",
+    "clsx": "^2.1.1",
+    "jsdom": "^26.0.0",
+    "svelte": "^5.0.0",
+    "svelte-check": "^4.0.0",
+    "tailwind-merge": "^3.0.2",
+    "tailwind-variants": "^1.0.0",
+    "tailwindcss": "^4.0.0",
+    "tw-animate-css": "^1.3.0",
+    "typescript": "^5.0.0",
+    "vite": "^6.2.6",
+    "vitest": "^3.0.0"
+  }
+}

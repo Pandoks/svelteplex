@@ -1,0 +1,20 @@
+{
+  "name": "@svelteplex/database",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "maindb:push": "drizzle-kit --config ./main/drizzle.config.ts push",
+    "maindb:studio": "drizzle-kit --config ./main/drizzle.config.ts studio"
+  },
+  "exports": {
+    "./main/*": "./main/schema/*.ts"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.43.1",
+    "pg": "^8.16.0",
+    "pg-native": "^3.5.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.1"
+  }
+}

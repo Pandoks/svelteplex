@@ -1,0 +1,53 @@
+node_modules
+
+# Output
+.output
+.vercel
+.svelte-kit
+build
+
+# OS
+.DS_Store
+Thumbs.db
+*.pem
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+.vite
+
+# Tests
+test-results
+playwright*/
+
+# sst
+.sst
+
+# No npm
+package-lock.json
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# AI
+.claude

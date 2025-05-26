@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+@source '../../../packages/svelte/src/**/*.{html,js,svelte,ts}';
+@import '@svelteplex/svelte/shadcn/css';
+@import '@svelteplex/svelte/styles/fonts';
