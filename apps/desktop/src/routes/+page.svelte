@@ -1,2 +1,16 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+  import { Badge } from '@svelteplex/svelte/shadcn/badge';
+</script>
+
+<div class="flex h-screen w-screen flex-col items-center justify-center">
+  <div class="-mt-20 flex flex-col items-center">
+    <Badge
+      class="border-neutral-300 bg-white/75 px-4 py-1 text-sm text-neutral-600"
+      variant="outline"
+    >
+      Mono
+    </Badge>
+    <h1 class="font-garamond -mt-2 text-9xl font-medium">SveltePlex</h1>
+    <h2 class="font-garamond mt-5 text-lg">Monorepo for Everything Svelte</h2>
+  </div>
+</div>

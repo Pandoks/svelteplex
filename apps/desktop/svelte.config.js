@@ -9,6 +9,10 @@ const config = {
     }),
     router: {
       type: 'hash'
+    },
+    alias: {
+      '@lib': '../../packages/svelte/src/lib',
+      '@lib/*': '../../packages/svelte/src/lib/*'
     }
   }
 };
