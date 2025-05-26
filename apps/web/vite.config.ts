@@ -13,6 +13,11 @@ export default defineConfig({
       targets: [{ src: '../../packages/svelte/static/fonts/*', dest: '/fonts' }]
     })
   ],
+  server: {
+    fs: {
+      allow: ['../../']
+    }
+  },
   test: {
     workspace: [
       {
