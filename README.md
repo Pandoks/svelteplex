@@ -40,6 +40,24 @@ static `woff2` files to show examples of how to import them throughout a monorep
 - The `packages` directory contains the shared libraries that are used across the monorepo.
   - In our case, we have database and svelte libraries.
 
+## Vite Modifications
+
+Because we're importing files from another directory that is out of the scope of the vite project,
+we need to allow vite to access files outside of the project directory (the rest of the monorepo).
+
+Add the following to the `vite.config.ts` of the app:
+
+```ts
+// vite.config.ts
+export default defineConfig({
+  server: {
+    fs: {
+      allow: ['../../'] // point this to the root of the monorepo
+    }
+  }
+});
+```
+
 ## Shadcn-Svelte
 
 Currently, in the monorepo, every `package.json` has a `shadcn` script that runs
@@ -51,6 +69,7 @@ The `packages/svelte` component library then exports the `shadcn` components so 
 them in other packages:
 
 ```json
+// package.json
 "exports": {
   "./shadcn/*": "./src/lib/components/ui/*/index.js",
   "./shadcn/css": "./src/app.css",
@@ -77,6 +96,7 @@ Again, you can read more about this in the `packages/svelte` README. When we use
 component, we need to add the following the app's `svelte.config.js`:
 
 ```js
+// svelte.config.js
 alias: {
   '@lib': '../../packages/svelte/src/lib',
   '@lib/*': '../../packages/svelte/src/lib/*'
