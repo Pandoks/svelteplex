@@ -150,7 +150,7 @@ export default defineConfig({
     ...
     viteStaticCopy({
       // don't point to static directory, point to finished build directory (static -> / after build)
-      targets: [{ src: '../../packages/svelte/static/fonts/*', dest: '/fonts' }]
+      targets: [{ src: '../../packages/svelte/static/fonts/*', dest: 'fonts' }]
     })
   ],
 ...
