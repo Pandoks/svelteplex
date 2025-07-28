@@ -65,6 +65,13 @@ Currently, in the monorepo, every `package.json` has a `shadcn` script that runs
 install `shadcn-svelte` components from any workspace in the monorepo just like you do a normal
 `npm` package, but the contents will always be installs in the `packages/svelte` directory.
 
+> [!IMPORTANT] 
+> You should only install `shadcn-svelte` components using the `shadcn` script:
+>
+> ```bash
+> pnpm run shadcn <component-name>
+> ```
+
 The `packages/svelte` component library then exports the `shadcn` components so that you can import
 them in other packages:
 
