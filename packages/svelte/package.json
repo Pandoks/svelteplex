@@ -10,7 +10,7 @@
     "test:unit": "vitest",
     "test": "npm run test:unit -- --run && npm run test:e2e",
     "test:e2e": "playwright test",
-    "shadcn": "pnpm dlx shadcn-svelte@next add"
+    "shadcn": "pnpm dlx shadcn-svelte@latest add"
   },
   "sideEffects": [
     "**/*.css"
@@ -37,7 +37,7 @@
     "@testing-library/svelte": "^5.2.4",
     "clsx": "^2.1.1",
     "jsdom": "^26.0.0",
-    "svelte": "^5.0.0",
+    "svelte": "^5.37.0",
     "svelte-check": "^4.0.0",
     "tailwind-merge": "^3.0.2",
     "tailwind-variants": "^1.0.0",

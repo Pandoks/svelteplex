@@ -16,7 +16,7 @@
     "test:unit": "vitest",
     "test": "npm run test:unit -- --run && npm run test:e2e",
     "test:e2e": "playwright test",
-    "shadcn": "pnpm dlx shadcn-svelte@next add $@ -c ../../../packages/svelte"
+    "shadcn": "pnpm dlx shadcn-svelte@latest add $@ -c ../../../packages/svelte"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.8.1",
@@ -41,7 +41,7 @@
     "@types/electron-squirrel-startup": "^1.0.2",
     "electron": "^36.3.1",
     "jsdom": "^26.0.0",
-    "svelte": "^5.0.0",
+    "svelte": "^5.37.0",
     "svelte-check": "^4.0.0",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.0.0",
@@ -50,7 +50,7 @@
     "vitest": "^3.0.0"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1",
-    "@svelteplex/svelte": "workspace:*"
+    "@svelteplex/svelte": "workspace:*",
+    "electron-squirrel-startup": "^1.0.1"
   }
 }

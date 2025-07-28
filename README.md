@@ -61,7 +61,7 @@ export default defineConfig({
 ## Shadcn-Svelte
 
 Currently, in the monorepo, every `package.json` has a `shadcn` script that runs
-`pnpm dlx shadcn-svelte@next add $@` in the `packages/svelte` directory. This is so that you can
+`pnpm dlx shadcn-svelte@latest add $@` in the `packages/svelte` directory. This is so that you can
 install `shadcn-svelte` components from any workspace in the monorepo just like you do a normal
 `npm` package, but the contents will always be installs in the `packages/svelte` directory.
 

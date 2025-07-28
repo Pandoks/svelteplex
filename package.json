@@ -6,7 +6,7 @@
     "setup": "docker compose -f ./setup.yaml -p setup up",
     "format": "prettier --write .",
     "lint": "prettier --check .",
-    "shadcn": "pnpm dlx shadcn-svelte@next add $@ -c packages/svelte"
+    "shadcn": "pnpm dlx shadcn-svelte@latest add $@ -c packages/svelte"
   },
   "devDependencies": {
     "prettier": "^3.4.2",
