@@ -1,3 +1,11 @@
 packages:
   - apps/*
   - packages/*
+
+patchedDependencies:
+  '@sveltejs/kit': patches/@sveltejs__kit.patch
+
+onlyBuiltDependencies:
+  - esbuild
+  - electron
+  - electron-winstaller
