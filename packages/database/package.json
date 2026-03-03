@@ -10,11 +10,11 @@
     "./main/*": "./main/schema/*.ts"
   },
   "dependencies": {
-    "drizzle-orm": "^0.43.1",
-    "pg": "^8.16.0",
-    "pg-native": "^3.5.0"
+    "drizzle-orm": "^0.45.1",
+    "pg": "^8.19.0",
+    "pg-native": "^3.6.0"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.31.1"
+    "drizzle-kit": "^0.31.9"
   }
 }
