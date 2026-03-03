@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { Badge } from '@svelteplex/svelte/shadcn/badge';
 </script>
 
@@ -12,5 +13,8 @@
     </Badge>
     <h1 class="font-garamond -mt-2 text-9xl font-medium">SveltePlex</h1>
     <h2 class="font-garamond mt-5 text-lg">Monorepo for Everything Svelte</h2>
+    <a href={resolve('/second')} class="mt-4 text-neutral-500 underline hover:text-neutral-800">
+      Go to the second route
+    </a>
   </div>
 </div>
