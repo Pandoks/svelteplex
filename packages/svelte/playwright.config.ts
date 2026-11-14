@@ -9,7 +9,7 @@ export default defineConfig({
   timeout: 60_000,
   expect: { timeout: 15_000 },
   webServer: {
-    command: `vite build && vite preview --port ${port}`,
+    command: `vite build && vite preview --port ${port} --strictPort`,
     url: `http://localhost:${port}`,
     timeout: 180_000,
     reuseExistingServer: !process.env.CI

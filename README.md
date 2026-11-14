@@ -176,3 +176,7 @@ export default defineConfig({
 The `src` points to the location of the static files relative to the app's `vite.config.ts`. _Note
 however_ that the `dest` points to the location of where the static files are `vite build` to
 instead of the location of the `static` directory of Sveltekit.
+
+`fonts.css` references the fonts with root-relative URLs (`/fonts/Inter.woff2`), so the packaged
+desktop app serves its renderer from an `app://` protocol (`apps/desktop/electron/main.ts`) instead
+of `file://`, where `/fonts/...` would point at the root of the filesystem.

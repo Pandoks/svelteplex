@@ -15,7 +15,6 @@ pmOnFail: ignore
 # supply-chain: dependency build-script allowlist
 allowBuilds:
   esbuild: true
-  electron: true
   electron-winstaller: true
   fs-xattr: true # @electron-forge/maker-dmg (packaging)
   macos-alias: true # @electron-forge/maker-dmg (packaging)

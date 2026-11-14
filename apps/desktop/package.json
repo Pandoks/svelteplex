@@ -1,6 +1,9 @@
 {
   "name": "@svelteplex/desktop",
   "productName": "SveltePlex",
+  "description": "SveltePlex desktop app",
+  "license": "UNLICENSED",
+  "author": "Pandoks",
   "private": true,
   "version": "0.0.1",
   "type": "module",

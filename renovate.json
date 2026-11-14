@@ -5,9 +5,11 @@
   "assignees": ["pandoks"],
   "minimumReleaseAge": "7 days",
   "minimumReleaseAgeBehaviour": "timestamp-optional",
-  "dependencyDashboardTitle": "[renovate] 🤖 outdated dependencies (DON'T DELETE)",
-  "dependencyDashboardLabels": ["dependencies"],
-  "dependencyDashboardOSVVulnerabilitySummary": "unresolved",
+  "dependencyDashboard": {
+    "title": "[renovate] 🤖 outdated dependencies (DON'T DELETE)",
+    "labels": ["dependencies"],
+    "osvVulnerabilitySummary": "unresolved"
+  },
   "osvVulnerabilityAlerts": true,
   "prConcurrentLimit": 5,
   "prHourlyLimit": 0,

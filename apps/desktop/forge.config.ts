@@ -10,9 +10,13 @@ import { cp } from 'node:fs/promises';
 import path from 'node:path';
 import { createBuilder } from 'vite';
 
+// NOTE: the deb and rpm makers otherwise look for a binary named after the scoped package name
+const EXECUTABLE_NAME = 'svelteplex';
+
 const config: ForgeConfig = {
   packagerConfig: {
-    asar: true
+    asar: true,
+    executableName: EXECUTABLE_NAME
   },
   outDir: 'build',
   rebuildConfig: {},
@@ -26,7 +30,12 @@ const config: ForgeConfig = {
       });
     }
   },
-  makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
+  makers: [
+    new MakerSquirrel({}),
+    new MakerZIP({}, ['darwin']),
+    new MakerRpm({ options: { bin: EXECUTABLE_NAME } }),
+    new MakerDeb({ options: { bin: EXECUTABLE_NAME } })
+  ],
   plugins: [
     new VitePlugin({
       // `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.
