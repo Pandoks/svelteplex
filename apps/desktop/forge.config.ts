@@ -6,6 +6,9 @@ import { MakerRpm } from '@electron-forge/maker-rpm';
 import { VitePlugin } from '@electron-forge/plugin-vite';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
+import { cp } from 'node:fs/promises';
+import path from 'node:path';
+import { createBuilder } from 'vite';
 
 const config: ForgeConfig = {
   packagerConfig: {
@@ -13,6 +16,16 @@ const config: ForgeConfig = {
   },
   outDir: 'build',
   rebuildConfig: {},
+  hooks: {
+    // TODO: drop this hook once VitePlugin builds renderers with `buildApp`. Its `build()` skips
+    // that step, which is where SvelteKit 3 runs its SSR build, prerender, and adapter.
+    packageAfterCopy: async (_forgeConfig, buildPath) => {
+      await (await createBuilder()).buildApp();
+      await cp('.vite/renderer/main_window', path.join(buildPath, '.vite/renderer/main_window'), {
+        recursive: true
+      });
+    }
+  },
   makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
   plugins: [
     new VitePlugin({

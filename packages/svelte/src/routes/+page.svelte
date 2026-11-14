@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Badge } from '@lib/components/ui/badge';
+  import { Badge } from '#lib/components/ui/badge/index.js';
 </script>
 
 <div class="flex h-screen w-screen flex-col items-center justify-center">

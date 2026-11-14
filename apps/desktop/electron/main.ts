@@ -13,19 +13,19 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(import.meta.dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.cjs')
     }
   });
 
   // and load the index.html of the app.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
-    mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
+    void mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
     mainWindow.webContents.on('did-frame-finish-load', () => {
       mainWindow.webContents.openDevTools({ mode: 'detach' });
     });
   } else {
-    mainWindow.loadFile(
-      path.join(import.meta.dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`)
+    void mainWindow.loadFile(
+      path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`)
     );
   }
 };
