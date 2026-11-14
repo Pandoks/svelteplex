@@ -3,8 +3,8 @@
 This is a monorepo template for SvelteKit apps. It shows you the basics of how to set up a Svelte
 component library, and how to use it in a SvelteKit app throughout a monorepo setup.
 
-This monorepo uses [shadcn-svelte](https://next.shadcn-svelte.com/) as a component library and
-static `woff2` files to show examples of how to import them throughout a monorepo.
+This monorepo uses [shadcn-svelte](https://shadcn-svelte.com/) as a component library and static
+`woff2` files to show examples of how to import them throughout a monorepo.
 
 **Everything this monorepo includes**:
 
@@ -12,6 +12,22 @@ static `woff2` files to show examples of how to import them throughout a monorep
 - An Electron [SveltronKit](https://github.com/Pandoks/sveltronkit) app
 - A Shadcn-Svelte component library that's shared across the monorepo
 - Static files that can be shared across the monorepo
+
+## Getting Started
+
+Tools are pinned in `mise.toml`:
+
+```bash
+mise install
+pnpm install
+```
+
+- `pnpm format` writes and `pnpm format:check` checks Prettier formatting.
+- `pnpm lint` runs ESLint, `pnpm check` type-checks every package, and `pnpm test` runs every
+  package's unit and e2e tests.
+- `pnpm setup` starts a local Postgres for `packages/database`.
+
+Dependencies are pinned to exact versions (`pnpm add -E`), and Renovate keeps them current.
 
 ## Structure
 
@@ -61,11 +77,12 @@ export default defineConfig({
 ## Shadcn-Svelte
 
 Currently, in the monorepo, every `package.json` has a `shadcn` script that runs
-`pnpm dlx shadcn-svelte@latest add $@` in the `packages/svelte` directory. This is so that you can
+`pnpm dlx shadcn-svelte@latest add` in the `packages/svelte` directory. This is so that you can
 install `shadcn-svelte` components from any workspace in the monorepo just like you do a normal
 `npm` package, but the contents will always be installs in the `packages/svelte` directory.
 
-> [!IMPORTANT] 
+<!-- prettier-ignore -->
+> [!IMPORTANT]
 > You should only install `shadcn-svelte` components using the `shadcn` script:
 >
 > ```bash
@@ -98,21 +115,12 @@ from the `packages/svelte` directory. We import them into apps by adding
 problem is that the utilities and the styles that the `packages/svelte` components need aren't
 imported correctly.
 
-We fix that by first using `@lib` imports within the `packages/svelte` directory instead of `$lib`.
-Again, you can read more about this in the `packages/svelte` README. When we use `packages/svelte`
-component, we need to add the following the app's `svelte.config.js`:
-
-```js
-// svelte.config.js
-alias: {
-  '@lib': '../../packages/svelte/src/lib',
-  '@lib/*': '../../packages/svelte/src/lib/*'
-}
-```
-
-Because we're using `@lib` imports, exclusively in the `shadcn-svelte` components, we can point them
-directly to the `packages/svelte` directory relative to the app's `svelte.config.js`. This will
-resolve imports within the `shadcn-svelte` components correctly.
+We fix that with [subpath imports](https://nodejs.org/api/packages.html#subpath-imports):
+`packages/svelte/package.json` maps `#lib/*` to its own `src/lib`, and `components.json` makes
+`shadcn-svelte` generate `#lib/...` imports. Node resolves `#` imports against the nearest
+`package.json`, so a component imported into an app still finds its utilities in `packages/svelte`
+without any alias in the app. Inside `packages/svelte`, always import with `#lib/...` and explicit
+file extensions instead of `$lib`.
 
 The next thing we have to do is import the styles correctly. Again, you can already import the
 styles because we export them from the `packages/svelte` package:
@@ -157,12 +165,18 @@ export default defineConfig({
     ...
     viteStaticCopy({
       // don't point to static directory, point to finished build directory (static -> / after build)
-      targets: [{ src: '../../packages/svelte/static/fonts/*', dest: 'fonts' }]
+      targets: [
+        { src: '../../packages/svelte/static/fonts/*', dest: 'fonts', rename: { stripBase: true } }
+      ]
     })
   ],
 ...
 ```
 
-The `src` points to the location of the static files relative to the app's `svelte.config.js`. _Note
+The `src` points to the location of the static files relative to the app's `vite.config.ts`. _Note
 however_ that the `dest` points to the location of where the static files are `vite build` to
 instead of the location of the `static` directory of Sveltekit.
+
+`fonts.css` references the fonts with root-relative URLs (`/fonts/Inter.woff2`), so the packaged
+desktop app serves its renderer from an `app://` protocol (`apps/desktop/electron/main.ts`) instead
+of `file://`, where `/fonts/...` would point at the root of the filesystem.

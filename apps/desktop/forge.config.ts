@@ -6,14 +6,36 @@ import { MakerRpm } from '@electron-forge/maker-rpm';
 import { VitePlugin } from '@electron-forge/plugin-vite';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
+import { cp } from 'node:fs/promises';
+import path from 'node:path';
+import { createBuilder } from 'vite';
+
+// NOTE: the deb and rpm makers otherwise look for a binary named after the scoped package name
+const EXECUTABLE_NAME = 'svelteplex';
 
 const config: ForgeConfig = {
   packagerConfig: {
-    asar: true
+    asar: true,
+    executableName: EXECUTABLE_NAME
   },
   outDir: 'build',
   rebuildConfig: {},
-  makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
+  hooks: {
+    // TODO: drop this hook once VitePlugin builds renderers with `buildApp`. Its `build()` skips
+    // that step, which is where SvelteKit 3 runs its SSR build, prerender, and adapter.
+    packageAfterCopy: async (_forgeConfig, buildPath) => {
+      await (await createBuilder()).buildApp();
+      await cp('.vite/renderer/main_window', path.join(buildPath, '.vite/renderer/main_window'), {
+        recursive: true
+      });
+    }
+  },
+  makers: [
+    new MakerSquirrel({}),
+    new MakerZIP({}, ['darwin']),
+    new MakerRpm({ options: { bin: EXECUTABLE_NAME } }),
+    new MakerDeb({ options: { bin: EXECUTABLE_NAME } })
+  ],
   plugins: [
     new VitePlugin({
       // `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.

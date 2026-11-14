@@ -1,17 +1,35 @@
 {
   "name": "svelteplex",
   "version": "1.0.0",
-  "packageManager": "pnpm@10.8.1",
+  "packageManager": "pnpm@12.16.1+sha512.091d1dee7927575661b25dab3c2ae31cafc1c54d6b71ed6a6600cf0c1cb10434a447eae14015f1b23e2e6bedeed79df94a932e2164d2832280dce3fb32f656d1",
+  "type": "module",
+  "engines": {
+    "node": ">=24",
+    "pnpm": "12.16.1"
+  },
   "scripts": {
     "setup": "docker compose -f ./setup.yaml -p setup up",
     "format": "prettier --write .",
-    "lint": "prettier --check .",
-    "shadcn": "pnpm dlx shadcn-svelte@latest add $@ -c packages/svelte"
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "check": "pnpm -r --if-present check",
+    "test": "pnpm -r --if-present test",
+    "shadcn": "pnpm dlx shadcn-svelte@latest add -c packages/svelte"
   },
   "devDependencies": {
-    "prettier": "^3.8.1",
-    "prettier-plugin-svelte": "^3.5.1",
-    "prettier-plugin-tailwindcss": "^0.7.2",
-    "typescript": "^5.9.3"
+    "@eslint/compat": "2.1.1",
+    "@eslint/js": "10.0.1",
+    "@types/node": "25.9.9",
+    "eslint": "10.14.0",
+    "eslint-plugin-svelte": "3.24.0",
+    "eslint-plugin-unicorn": "76.0.0",
+    "globals": "17.14.0",
+    "jiti": "2.7.0",
+    "prettier": "3.9.10",
+    "prettier-plugin-svelte": "4.1.1",
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "svelte-eslint-parser": "1.10.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.1"
   }
 }

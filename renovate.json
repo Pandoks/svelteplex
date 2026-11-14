@@ -1,0 +1,34 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices", ":semanticCommits", "group:allNonMajor", "group:allDigest"],
+  "labels": ["dependencies"],
+  "assignees": ["pandoks"],
+  "minimumReleaseAge": "7 days",
+  "minimumReleaseAgeBehaviour": "timestamp-optional",
+  "dependencyDashboard": {
+    "title": "[renovate] 🤖 outdated dependencies (DON'T DELETE)",
+    "labels": ["dependencies"],
+    "osvVulnerabilitySummary": "unresolved"
+  },
+  "osvVulnerabilityAlerts": true,
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 0,
+  "rangeStrategy": "pin",
+  "postUpdateOptions": ["pnpmDedupe"],
+  "packageRules": [
+    {
+      "description": "Every pnpm copy (packageManager, engines, mise.toml) moves in one PR.",
+      "matchPackageNames": ["pnpm"],
+      "groupName": "pnpm"
+    },
+    {
+      "description": "Keep engines.node a range.",
+      "matchDepTypes": ["engines"],
+      "matchPackageNames": ["node"],
+      "enabled": false
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["security"]
+  }
+}

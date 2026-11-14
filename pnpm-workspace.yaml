@@ -2,7 +2,19 @@ packages:
   - apps/*
   - packages/*
 
-onlyBuiltDependencies:
-  - esbuild
+engineStrict: true
+nodeLinker: hoisted # needed for electron
+publicHoistPattern:
   - electron
-  - electron-winstaller
+enablePrePostScripts: false # supply-chain: block pre/post lifecycle scripts on `pnpm <script>`
+
+# pnpm 12 records packageManagerDependencies as a second YAML document by default;
+# ignore keeps a single-document lockfile.
+pmOnFail: ignore
+
+# supply-chain: dependency build-script allowlist
+allowBuilds:
+  esbuild: true
+  electron-winstaller: true
+  fs-xattr: true # @electron-forge/maker-dmg (packaging)
+  macos-alias: true # @electron-forge/maker-dmg (packaging)
